@@ -1,6 +1,9 @@
 .vscode
+.idea
 .mypy_cache
+.gitlab-ci.yml
 docker-stack.yml
 backend/csv
 *.env
 *.lock
+*.mdb
