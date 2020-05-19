@@ -1,0 +1,6 @@
+.vscode
+.mypy_cache
+docker-stack.yml
+backend/csv
+*.env
+*.lock
