@@ -3,6 +3,9 @@ from typing import Optional
 
 from pydantic import BaseModel, validator
 
+LINE_SEPARATOR = '<br/>'
+INDENT_SYMBOL = '&nbsp' * 8
+
 
 # Shared properties
 class LectionBase(BaseModel):
@@ -10,6 +13,7 @@ class LectionBase(BaseModel):
     title: str
     content_ru: str
     city: Optional[str] = None
+    country: Optional[str] = None
     date: Optional[date]
 
 
@@ -19,12 +23,8 @@ class LectionInDB(LectionBase):
         orm_mode = True
 
 
-# Properties to return to client
-class LectionPreview(LectionInDB):
-    @validator("content_ru")
-    def strip_len(cls, v):
-        return v[:200]
-
-
 class Lection(LectionInDB):
-    pass
+
+    @validator("content_ru")
+    def format_line_breaks(cls, v: str):
+        return '{}{}'.format(INDENT_SYMBOL, v.replace('\n', f'{LINE_SEPARATOR}{INDENT_SYMBOL}'))

@@ -5,12 +5,12 @@ from sqlalchemy.orm import Session
 
 from app import crud
 from app.api.utils.db import get_db
-from schemas.lection import LectionPreview, Lection
+from schemas.lection import Lection
 
 router = APIRouter()
 
 
-@router.get("/", response_model=List[LectionPreview])
+@router.get("/", response_model=List[Lection])
 def read_items(
     db: Session = Depends(get_db), skip: int = 0, limit: int = 100,
 ):
@@ -33,12 +33,12 @@ def read_item(
     return item
 
 
-@router.get("/search/{query}", response_model=List[LectionPreview])
-def read_item(
+@router.get("/search/{query}", response_model=List[Lection])
+def search(
     *, db: Session = Depends(get_db), query: str,
 ):
     """
     Simple lections search.
     """
-    lections = crud.lection.search(db_session=db, query=query)
+    lections = crud.lection.full_text_search(db_session=db, query=query)
     return lections
