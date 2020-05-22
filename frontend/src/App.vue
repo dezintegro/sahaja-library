@@ -24,10 +24,10 @@
   export default class App extends Vue {
   }
 </script>
+
 <style>
   .highlightText {
     background: lightgray;
     /*color: white;*/
   }
-
 </style>

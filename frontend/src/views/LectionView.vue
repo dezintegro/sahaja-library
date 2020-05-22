@@ -1,11 +1,12 @@
 <template>
-  <v-content>
+  <v-content tabindex="-1" @keyup.enter="nextHighlight" @keyup.left="prevHighlight">
+          <vue-scroll-progress-bar height="0.5rem"/>
     <v-container>
       <v-card outlined v-if="lection">
         <v-card-title class="display-1">{{ lection.title }}</v-card-title>
         <v-card-subtitle> {{ lection.city }} {{ lection.year }}</v-card-subtitle>
         <v-divider></v-divider>
-        <v-card-text @mouseup="getSelectionText" class="body-1 mt-1"
+        <v-card-text class="lection-text" @mouseup="getSelectionText"
                      v-html="highlightSearch(lection.content_ru, String($route.query.highlight))">
         </v-card-text>
       </v-card>
@@ -34,6 +35,8 @@
     public highlightIdx = -1;
 
     public created() {
+      console.log(document.onkeydown)
+      document.onkeydown = this.onKeyDown
       const lection = getCurrentLection(this.$store);
       const lectionId = Number(this.$route.params.lectionId);
       if (!lection || lection.id !== lectionId) {
@@ -41,6 +44,20 @@
       }
     }
 
+    public destroyed() {
+      console.log('Destoryed')
+      document.onkeydown = null
+    }
+
+    public onKeyDown(e){
+      if (e.code === "ArrowRight") {
+        console.log(e.code)
+        this.nextHighlight()
+      }
+      if (e.code === "ArrowLeft") {
+        this.prevHighlight()
+      }
+    }
     get lection() {
       return getCurrentLection(this.$store);
     }
@@ -71,5 +88,11 @@
 
   .fab-container > .v-btn--fab {
     margin-bottom: 5px;
+  }
+
+  .lection-text {
+    color: black;
+    font-size: large;
+    padding: 20px 30px;
   }
 </style>

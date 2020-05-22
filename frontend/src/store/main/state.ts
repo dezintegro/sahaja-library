@@ -11,7 +11,8 @@ export interface Lection {
     content_ru: string;
     title: string;
     city?: string;
-    date?: string;
+    country?: string;
+    date?: Date;
 }
 
 export interface MainState {
@@ -24,5 +25,6 @@ export interface MainState {
     notifications: AppNotification[];
     searchQuery: string | null;
     searchResult: Lection[];
+    searchIsLoading: boolean;
     currentLection: Lection | null;
 }

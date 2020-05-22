@@ -13,6 +13,7 @@ const defaultState: MainState = {
   notifications: [],
   searchQuery: null,
   searchResult: [],
+  searchIsLoading: false,
   currentLection: null,
 };
 

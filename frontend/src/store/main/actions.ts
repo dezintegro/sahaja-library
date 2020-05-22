@@ -14,6 +14,7 @@ import {
     commitSetUserProfile,
     commitSetSearchResult,
     commitSetCurrentLection,
+    commitSetSearchIsLoading,
 } from './mutations';
 import { AppNotification, MainState } from './state';
 
@@ -157,10 +158,12 @@ export const actions = {
         }
     },
     async actionSearch(context: MainContext, payload: { query: string }) {
+        commitSetSearchIsLoading(context, true);
         try {
             const response = await api.getSearchResults(payload.query);
             if (response.data) {
                 commitSetSearchResult(context, response.data);
+                commitSetSearchIsLoading(context, false);
                 // await router.push({name: 'searchResult', params: {query: payload.query}});
             }
         } catch (error) {

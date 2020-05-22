@@ -16,6 +16,7 @@ export const getters = {
     isLoggedIn: (state: MainState) => state.isLoggedIn,
     firstNotification: (state: MainState) => state.notifications.length > 0 && state.notifications[0],
     searchResult: (state: MainState) => state.searchResult,
+    searchIsLoading: (state: MainState) => state.searchIsLoading,
     currentLection: (state: MainState) => state.currentLection,
 };
 
@@ -30,4 +31,5 @@ export const readToken = read(getters.token);
 export const readUserProfile = read(getters.userProfile);
 export const readFirstNotification = read(getters.firstNotification);
 export const getSearchResult = read(getters.searchResult);
+export const getSearchIsLoading = read(getters.searchIsLoading);
 export const getCurrentLection = read(getters.currentLection);

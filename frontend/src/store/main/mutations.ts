@@ -29,8 +29,17 @@ export const mutations = {
     removeNotification(state: MainState, payload: AppNotification) {
         state.notifications = state.notifications.filter((notification) => notification !== payload);
     },
+    setSearchIsLoading(state: MainState, payload: boolean) {
+        state.searchIsLoading = payload;
+    },
     setSearchResult(state: MainState, payload: Lection[]) {
-        state.searchResult = payload;
+        payload.map(
+          lection => {
+              if (lection.date) {
+                  lection.date = new Date(lection.date)
+              }
+          })
+        state.searchResult = payload
     },
     setCurrentLection(state: MainState, payload: Lection) {
         state.currentLection = payload;
@@ -48,4 +57,5 @@ export const commitSetUserProfile = commit(mutations.setUserProfile);
 export const commitAddNotification = commit(mutations.addNotification);
 export const commitRemoveNotification = commit(mutations.removeNotification);
 export const commitSetSearchResult = commit(mutations.setSearchResult);
+export const commitSetSearchIsLoading = commit(mutations.setSearchIsLoading);
 export const commitSetCurrentLection = commit(mutations.setCurrentLection);
