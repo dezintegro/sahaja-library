@@ -16,4 +16,6 @@ services:
   db:
     ports:
       - 5432:5432
-
+  postgres:
+    ports:
+      - 5433:5432

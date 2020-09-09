@@ -12,6 +12,6 @@ EXPOSE 8888
 COPY ./src /app
 WORKDIR /app/
 
-ENV PYTHONPATH=/app
+ENV PYTHONPATH=/app:/app/app
 
 EXPOSE 80

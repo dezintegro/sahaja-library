@@ -10,9 +10,9 @@ import store from '@/store';
 import './registerServiceWorker';
 import vuetify from '@/plugins/vuetify';
 import 'vuetify/dist/vuetify.min.css';
-import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar'
+import VueScrollProgressBar from '@guillaumebriday/vue-scroll-progress-bar';
 
-Vue.use(VueScrollProgressBar)
+Vue.use(VueScrollProgressBar);
 
 Vue.config.productionTip = false;
 

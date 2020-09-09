@@ -34,14 +34,28 @@ export const mutations = {
     },
     setSearchResult(state: MainState, payload: Lection[]) {
         payload.map(
-          lection => {
+          (lection) => {
               if (lection.date) {
-                  lection.date = new Date(lection.date)
+                  lection.date = new Date(lection.date);
               }
-          })
-        state.searchResult = payload
+          });
+        state.searchResult = payload;
     },
     setCurrentLection(state: MainState, payload: Lection) {
+        // TODO move needle to consts or api
+        let idx = 0;
+        let content = payload.content_ru.replace(
+          /<\/span>\s<span class="highlight">/gi, ' ');
+
+        content = content.replace(/<span class="highlight"/g,
+          (match) => {
+              return `${match} id="highlight${idx++}"`;
+          },
+        );
+        payload.content_ru = content;
+        if (payload.date) {
+            payload.date = new Date(payload.date);
+        }
         state.currentLection = payload;
     },
 };

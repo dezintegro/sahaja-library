@@ -164,15 +164,20 @@ export const actions = {
             if (response.data) {
                 commitSetSearchResult(context, response.data);
                 commitSetSearchIsLoading(context, false);
-                // await router.push({name: 'searchResult', params: {query: payload.query}});
             }
         } catch (error) {
             await dispatchCheckApiError(context, error);
         }
     },
-    async actionGetLection(context: MainContext, payload: { lectionId: number }) {
+    async actionGetHighlightedLection(context: MainContext, payload: { lectionId: number, highlight: string | (string | null)[] }) {
         try {
-            const response = await api.getLection(payload.lectionId);
+            let response;
+            if (payload.highlight) {
+                // TODO: Check typing later
+                response = await api.getHighlightedLection(payload.lectionId, payload.highlight.toString());
+            } else {
+                response = await api.getLection(payload.lectionId);
+            }
             if (response.data) {
                 commitSetCurrentLection(context, response.data);
             }
@@ -198,4 +203,4 @@ export const dispatchRemoveNotification = dispatch(actions.removeNotification);
 export const dispatchPasswordRecovery = dispatch(actions.passwordRecovery);
 export const dispatchResetPassword = dispatch(actions.resetPassword);
 export const dispatchSearch = dispatch(actions.actionSearch);
-export const dispatchGetLection = dispatch(actions.actionGetLection);
+export const dispatchGetHighlightedLection = dispatch(actions.actionGetHighlightedLection);

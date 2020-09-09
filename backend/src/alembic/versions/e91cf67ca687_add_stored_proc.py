@@ -6,7 +6,7 @@ Create Date: 2020-05-18 23:30:47.527365
 
 """
 from alembic import op
-from db.query.stored_procedures import (
+from app.db.query.stored_procedures import (
     make_tsvector,
     tsvector_trigger_proc,
     tsvector_trigger,

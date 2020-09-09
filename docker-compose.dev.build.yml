@@ -23,3 +23,7 @@ services:
       context: ./frontend
       args:
         FRONTEND_ENV: dev
+  postgres:
+    build:
+      context: ./database
+      dockerfile: postgres.dockerfile

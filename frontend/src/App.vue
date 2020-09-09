@@ -26,7 +26,7 @@
 </script>
 
 <style>
-  .highlightText {
+  .highlight {
     background: lightgray;
     /*color: white;*/
   }

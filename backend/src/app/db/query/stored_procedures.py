@@ -18,7 +18,7 @@ tsvector_trigger_proc = text(
         CREATE OR REPLACE FUNCTION tsvector_ru_trigger() 
           RETURNS trigger AS $$
         BEGIN
-          NEW.tsvector_ru := make_tsvector_ru(NEW.title, NEW.content_ru);
+          NEW.tsvector_ru := make_tsvector_ru(NEW.title::text, NEW.content_ru::text);
           RETURN NEW;
         END
         $$ LANGUAGE 'plpgsql';

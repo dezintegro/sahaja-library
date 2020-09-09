@@ -45,9 +45,11 @@ export const api = {
   },
   async getSearchResults(query: string) {
     return axios.get<Lection[]>(`${apiUrl}/api/v1/lections/search/${query}`);
-    // return axios.get<Lection[]>(`${apiUrl}/api/v1/lections/`);//search/${query}`);
   },
   async getLection(id: number) {
     return axios.get<Lection>(`${apiUrl}/api/v1/lections/${id}/`);
+  },
+  async getHighlightedLection(id: number, highlight: string) {
+    return axios.get<Lection>(`${apiUrl}/api/v1/lections/${id}/?highlight=${highlight}`);
   },
 };

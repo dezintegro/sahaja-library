@@ -31,55 +31,55 @@
 </template>
 
 <script lang="ts">
-  import {Component, Vue} from 'vue-property-decorator';
-  import {getSearchResult, getSearchIsLoading} from '@/store/main/getters';
-  import {dispatchSearch} from '@/store/main/actions';
-  import SearchHighlightMixin from '@/mixins/text-highlight-mixin';
-  import {Lection} from "@/store/main/state";
+import {Component, Vue} from 'vue-property-decorator';
+import {getSearchResult, getSearchIsLoading} from '@/store/main/getters';
+import {dispatchSearch} from '@/store/main/actions';
+import SearchHighlightMixin from '@/mixins/text-highlight-mixin';
+import {Lection} from '@/store/main/state';
 
-  @Component
-  export default class SearchResult extends SearchHighlightMixin {
-    public searchQuery: string = '';
+@Component
+export default class SearchResult extends SearchHighlightMixin {
+  public searchQuery: string = '';
 
-    public created() {
-      console.log('SearchResult created')
-      if (this.$route.params.query) {
-        this.searchQuery = this.$route.params.query;
-        dispatchSearch(this.$store, {query: this.searchQuery});
-      }
+  public created() {
+    console.log('SearchResult created');
+    if (this.$route.params.query) {
+      this.searchQuery = this.$route.params.query;
+      dispatchSearch(this.$store, {query: this.searchQuery});
     }
-
-    public updated() {
-      console.log('SearchResult updated')
-    }
-
-    public onSearch() {
-      if (this.searchQuery) {
-        dispatchSearch(this.$store, {query: this.searchQuery});
-        this.$router.push(`/search/${this.searchQuery}`);
-      }
-    }
-
-    public formatLocation(lection: Lection) {
-      if (lection.city && lection.country) return `${lection.city} (${lection.country})`
-      return lection.country || lection.city
-    }
-
-    public formatDate(lection: Lection) {
-      if (lection.date) {
-        return lection.date.toLocaleDateString()
-      }
-    }
-
-    get searchResult() {
-      return getSearchResult(this.$store);
-    }
-
-    get searchIsLoading() {
-      return getSearchIsLoading(this.$store);
-    }
-
   }
+
+  public updated() {
+    console.log('SearchResult updated');
+  }
+
+  public onSearch() {
+    if (this.searchQuery) {
+      dispatchSearch(this.$store, {query: this.searchQuery});
+      this.$router.push(`/search/${this.searchQuery}`);
+    }
+  }
+
+  public formatLocation(lection: Lection) {
+    if (lection.city && lection.country) { return `${lection.city} (${lection.country})`; }
+    return lection.country || lection.city;
+  }
+
+  public formatDate(lection: Lection) {
+    if (lection.date) {
+      return lection.date.toLocaleDateString();
+    }
+  }
+
+  get searchResult() {
+    return getSearchResult(this.$store);
+  }
+
+  get searchIsLoading() {
+    return getSearchIsLoading(this.$store);
+  }
+
+}
 </script>
 
 <style scoped>
