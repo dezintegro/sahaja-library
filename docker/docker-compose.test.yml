@@ -2,12 +2,12 @@ version: '3.3'
 services:
   backend-tests:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: tests.dockerfile
     command: bash -c "while true; do sleep 1; done"
     env_file:
-      - env-backend.env
-      - env-postgres.env
+      - ../env-backend.env
+      - ../env-postgres.env
     environment:
       - SERVER_NAME=backend
   backend:

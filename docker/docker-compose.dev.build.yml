@@ -2,28 +2,28 @@ version: '3.3'
 services:
   backend:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: backend.dockerfile
       args:
         env: dev
   celeryworker:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: celeryworker.dockerfile
       args:
         env: dev
   backend-tests:
     build:
-      context: ./backend
+      context: ../backend
       dockerfile: tests.dockerfile
       args:
         env: dev
   frontend:
     build:
-      context: ./frontend
+      context: ../frontend
       args:
         FRONTEND_ENV: dev
   postgres:
     build:
-      context: ./database
+      context: ../database
       dockerfile: postgres.dockerfile

@@ -13,9 +13,6 @@ services:
   backend:
     ports:
       - '8888:8888'
-  db:
-    ports:
-      - 5432:5432
   postgres:
     ports:
       - 5433:5432
