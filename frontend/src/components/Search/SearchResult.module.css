@@ -1,0 +1,11 @@
+.annotationBlock {
+    width: 100%;
+    padding: 10px 0 5px 16px;
+}
+
+@media only screen and (min-width: 800px) {
+    .annotationBlock {
+        width: 800px;
+        padding-left: 36px;
+    }
+}

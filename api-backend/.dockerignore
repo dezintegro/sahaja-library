@@ -1,0 +1,13 @@
+*.pyc
+*.pyo
+*.mo
+*.db
+*.css.map
+*.egg-info
+
+.env
+.env.*
+.venv
+*.py[cod]
+__pycache__
+Dockerfile

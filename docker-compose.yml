@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  postgres:
+    restart: on-failure
+    build:
+      context: ./database
+      dockerfile: postgres.dockerfile
+#    expose:
+#      - "5432"
+    volumes:
+      - ./database/pg_data:/var/lib/postgresql/data
+    env_file:
+      - .env.docker
+
+  api-backend:
+    build:
+      context: ./api-backend
+#    command: sh -c "python manage.py migrate --no-input --fake-initial && gunicorn sahajalib.wsgi -b 0:8000"
+    command: sh -c "python manage.py migrate --no-input --fake-initial && python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env.docker
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+          FRONTEND_ENV: production
+
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
+    volumes:
+      - ./nginx/sites-enabled:/etc/nginx/sites-enabled

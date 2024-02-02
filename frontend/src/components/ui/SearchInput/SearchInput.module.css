@@ -1,0 +1,53 @@
+.searchContainer {
+    display: flex;
+    gap: 0.25rem;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.search {
+    border: none;
+    width: 350px;
+    background: transparent linear-gradient(#ccc, #31C48D) center bottom 1px /calc(100% - 10px) 2px no-repeat;
+    padding: 10px;
+    outline-width: 0;
+    transition: 0.5s;
+}
+
+.search:focus {
+    outline: none;
+    box-shadow: none;
+    background: transparent linear-gradient(#31C48D, #3F83F8) center bottom 1px /calc(100% - 10px) 2px no-repeat;
+
+}
+
+.btnGrad {
+    background-image: linear-gradient(to right, #36D1DC 0%, #5B86E5 51%, #36D1DC 100%);
+    /*margin: 10px;*/
+    /*text-transform: uppercase;*/
+    padding: 5px 25px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+}
+
+.btnGrad:hover {
+    background-position: right center; /* change the direction of the change here */
+    /*color: #fff;*/
+    /*text-decoration: none;*/
+}
+
+@media (max-width: 480px) {
+    .search {
+        width: 100%;
+    }
+
+    .searchContainer {
+        width: 98%;
+    }
+}

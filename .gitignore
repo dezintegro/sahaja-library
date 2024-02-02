@@ -1,0 +1,24 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Additional env files
+.env.docker
+api-backend/.env*
+
+# mkdocs documentation
+/site
+
+.idea
+.DS_Store
+
+.werf_secret_key
+.helm/charts
+
+/frontend_vue/
+
