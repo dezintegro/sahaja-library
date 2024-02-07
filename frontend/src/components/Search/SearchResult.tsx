@@ -17,9 +17,18 @@ export interface ISearchResultItem {
 export default function SearchResult() {
   const router = useRouter()
   const query = router.query.searchQuery
-  const address = `${API_URL}/lections/search/${query}/`
-  const fetcher = async (url: string) => await axios.get<ISearchResultItem[]>(url).then((res) => res.data)
-  const { data, error, isLoading } = useSWR(address, fetcher)
+
+  const fetcher = async (query: string) => {
+    if (!query) {
+      console.log('Empty query')
+      return
+    }
+    const url = `${API_URL}/lections/search/${query}/`
+    const response = await axios.get<ISearchResultItem[]>(url)
+    return response.data
+  }
+
+  const { data, error, isLoading } = useSWR(query, fetcher)
 
   if (error) {
     console.error(error)
