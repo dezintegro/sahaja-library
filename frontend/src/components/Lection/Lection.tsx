@@ -19,12 +19,10 @@ export interface ILection {
 export const Lection: FC = () => {
   const router = useRouter()
   const { id, highlight } = router.query
-  console.log(router.query)
   const address = `${API_URL}/lections/${id}/?highlight=${highlight}`
-  console.log('Lection address', address)
 
   const fetcher = async (url: string): Promise<ILection> => await axios.get(url).then((res) => res.data)
-  const { data, error } = useSWR(address, fetcher)
+  const { data, error } = useSWR(id ? address : null, fetcher)
 
   if (error) {
     return <p>Loading failed...</p>
