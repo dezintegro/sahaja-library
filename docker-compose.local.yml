@@ -1,14 +1,7 @@
 version: '3'
 services:
-  redis:
-    image: redis
-    expose:
-      - "6379"
-    ports:
-      - "6379:6379"
 
   postgres:
-#    image: postgres:11-alpine
     restart: on-failure
     build:
       context: ./database
@@ -21,21 +14,3 @@ services:
       - ./database/pg_data:/var/lib/postgresql/data
     env_file:
       - api-backend/.env.local
-  manticore:
-    container_name: manticore
-    image: manticoresearch/manticore
-    restart: always
-    ports:
-      - 9306:9306
-      - 9308:9308
-    volumes:
-      - ./database/manticore:/var/lib/manticore
-
-#  nginx:
-#    build:
-#      context: "nginx"
-#      dockerfile: "Dockerfile"
-#    ports:
-#      - '80:80'
-#      - '8090:8080'
-#      - '443:443'

@@ -22,8 +22,6 @@ services:
       - .env.docker
     depends_on:
       - postgres
-    volumes:
-      - ./api-backend:/usr/src/app
 
   frontend:
     build:
@@ -38,5 +36,6 @@ services:
       - '80:80'
       - '443:443'
       - '8080:8080'
-    volumes:
-      - ./nginx/sites-enabled:/etc/nginx/sites-enabled
+    depends_on:
+      - frontend
+      - api-backend
