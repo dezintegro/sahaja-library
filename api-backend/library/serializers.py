@@ -35,7 +35,6 @@ class LectionSerializer(serializers.ModelSerializer):
 
 
 class LectionReadSerializer(LectionSerializer):
-
     def get_content_ru(self, obj) -> str:
         # Get content from qs annotation and prettify indents
         content = getattr(obj, "content", obj.content_ru)

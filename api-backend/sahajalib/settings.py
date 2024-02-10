@@ -29,9 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ef%p12@x$0cbm4vr(i0*h7dh#7)()tlq#51^q(m=2c7xo+qzx#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = strtobool(os.environ.get('IS_DEBUG', '0'))
+DEBUG = strtobool(os.environ.get("IS_DEBUG", "0"))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -133,10 +133,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    # TODO: Enable pagination support
-    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    # "PAGE_SIZE": 100,
-    "DEFAULT_PAGINATION_CLASS": None,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    # "PAGE_SIZE": None,
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -155,7 +154,7 @@ CORS_ALLOWED_ORIGINS = [
 #     "handlers": {
 #         "console": {
 #             "level": "DEBUG",
-#             "filters": ["require_debug_true"],
+#             # "filters": ["require_debug_true"],
 #             "class": "logging.StreamHandler",
 #         }
 #     },
