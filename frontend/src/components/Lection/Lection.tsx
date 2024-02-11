@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { API_URL } from '../../shared/constants'
 import cardStyles from '../ui/LectionCard/LectionCard.module.css'
 import lectionStyles from './Lection.module.css'
+import { Spinner } from '../ui/Spinner'
 
 export interface ILection {
   id: number
@@ -27,9 +28,13 @@ export const Lection: FC = () => {
   if (error) {
     return <p>Loading failed...</p>
   }
-  if (!data) {
-    return <h1>Loading...</h1>
-  }
+
+  if (!data)
+    return (
+      <div className="mt-4">
+        <Spinner />
+      </div>
+    )
 
   return (
     <div className={lectionStyles.container}>
