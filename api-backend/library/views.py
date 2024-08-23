@@ -60,7 +60,7 @@ class LectionSearchView(generics.ListAPIView):
     def _build_filter(self, query_str, date_entity):
         base_filter = Q()
         if query_str:
-            base_filter.add(Q(tsvector_ru=SearchQuery(query_str, config="russian")), Q.AND)
+            base_filter.add(Q(tsvector_ru=SearchQuery(query_str, config="russian"), rank__gte=SEARCH_MIN_RANK), Q.AND)
         if date_entity:
             filter_args = {
                 f"date__{key}": value
@@ -99,7 +99,7 @@ class LectionSearchView(generics.ListAPIView):
             Lection.objects.annotate(
                 rank=SearchRank(F("tsvector_ru"), search_query),
             ).order_by("-rank")
-        ).filter(qs_filter).filter(rank__gte=SEARCH_MIN_RANK)
+        ).filter(qs_filter)
 
         page = self.paginate_queryset(base_qs)
 
