@@ -3,6 +3,7 @@ import type { AppProps } from 'next/app'
 import { Suspense } from 'react'
 import { Metrika } from '../src/components/Metrika'
 import Head from 'next/head'
+import SelectableText from '../src/components/Lection/SelectableText'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -20,6 +21,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:image" content="/og-image.jpg" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <SelectableText />
+
       <Component {...pageProps} />
     </>
   )

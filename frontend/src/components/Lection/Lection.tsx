@@ -6,6 +6,8 @@ import { API_URL } from '../../shared/constants'
 import cardStyles from '../ui/LectionCard/LectionCard.module.css'
 import lectionStyles from './Lection.module.css'
 import { Spinner } from '../ui/Spinner'
+import Floating from './Floating'
+import { bgBlack } from 'kleur/colors'
 
 export interface ILection {
   id: number
