@@ -2,7 +2,7 @@ version: '3'
 services:
 
   postgres:
-    restart: on-failure
+    restart: always
     build:
       context: ./database
       dockerfile: postgres.dockerfile
@@ -22,12 +22,14 @@ services:
       - .env.docker
     depends_on:
       - postgres
+    restart: always
 
   frontend:
     build:
       context: ./frontend
       args:
           FRONTEND_ENV: production
+    restart: always
 
   nginx:
     build:
@@ -39,3 +41,4 @@ services:
     depends_on:
       - frontend
       - api-backend
+    restart: always
