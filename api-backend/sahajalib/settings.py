@@ -10,12 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
+from distutils.util import strtobool
 from pathlib import Path
 
+import sentry_sdk
 from dotenv import load_dotenv
 
 # Load env variables from file
 load_dotenv()
+
+sentry_sdk.init(
+    dsn=os.environ.get("SENTRY_DSN"),
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for tracing.
+    traces_sample_rate=0.5,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=0.5,
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +41,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-ef%p12@x$0cbm4vr(i0*h7dh#7)()tlq#51^q(m=2c7xo+qzx#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.environ.get("IS_DEBUG", "0"))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -132,10 +145,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    # TODO: Enable pagination support
-    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    # "PAGE_SIZE": 100,
-    "DEFAULT_PAGINATION_CLASS": None,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+    # "PAGE_SIZE": None,
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -154,7 +166,7 @@ CORS_ALLOWED_ORIGINS = [
 #     "handlers": {
 #         "console": {
 #             "level": "DEBUG",
-#             "filters": ["require_debug_true"],
+#             # "filters": ["require_debug_true"],
 #             "class": "logging.StreamHandler",
 #         }
 #     },

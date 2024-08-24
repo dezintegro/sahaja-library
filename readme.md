@@ -22,5 +22,9 @@ TODO:
 6. Редактирование через админку и актуализация\проверка текстов с амрутой
    * продумать флоу
    * найти кто будет делать
-   * 
-NGINX https://www.digitalocean.com/community/tools/nginx?domains.0.server.domain=sahajalib.com&domains.0.php.php=false&domains.0.routing.root=false&domains.0.routing.index=index.html&domains.0.routing.fallbackHtml=true&domains.0.routing.fallbackPhp=false&global.logging.cloudflare=true&global.logging.trueClientIp=true&global.docker.dockerfile=true&global.docker.dockerCompose=true&global.app.lang=ru
+   
+NGINX config
+   https://www.digitalocean.com/community/tools/nginx?domains.0.server.domain=sahajalib.com&domains.0.php.php=false&domains.0.routing.root=false&domains.0.routing.index=index.html&domains.0.routing.fallbackHtml=true&domains.0.routing.fallbackPhp=false&global.logging.cloudflare=true&global.logging.trueClientIp=true&global.docker.dockerfile=true&global.docker.dockerCompose=true&global.app.lang=ru
+
+NGINX + LetsEncrypt
+   https://mindsers.blog/en/post/https-using-nginx-certbot-docker/

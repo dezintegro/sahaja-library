@@ -5,6 +5,7 @@ import useSWR from 'swr'
 import { API_URL } from '../../shared/constants'
 import cardStyles from '../ui/LectionCard/LectionCard.module.css'
 import lectionStyles from './Lection.module.css'
+import { Spinner } from '../ui/Spinner'
 
 export interface ILection {
   id: number
@@ -19,19 +20,21 @@ export interface ILection {
 export const Lection: FC = () => {
   const router = useRouter()
   const { id, highlight } = router.query
-  console.log(router.query)
   const address = `${API_URL}/lections/${id}/?highlight=${highlight}`
-  console.log('Lection address', address)
 
   const fetcher = async (url: string): Promise<ILection> => await axios.get(url).then((res) => res.data)
-  const { data, error } = useSWR(address, fetcher)
+  const { data, error } = useSWR(id ? address : null, fetcher)
 
   if (error) {
     return <p>Loading failed...</p>
   }
-  if (!data) {
-    return <h1>Loading...</h1>
-  }
+
+  if (!data)
+    return (
+      <div className="mt-4">
+        <Spinner />
+      </div>
+    )
 
   return (
     <div className={lectionStyles.container}>

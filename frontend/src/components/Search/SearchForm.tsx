@@ -12,7 +12,6 @@ export const SearchForm: FC = () => {
   }
   const handleSearch = () => {
     searchQuery && router.push(`/search/${searchQuery}`)
-    // searchQuery && router.push(`/search/${searchQuery}`, undefined, { shallow: true })
   }
 
   return <SearchInput value={searchQuery} onChange={handleChangeValue} onSearch={handleSearch} />

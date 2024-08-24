@@ -1,6 +1,11 @@
 from django.urls import path
 
-from library.views import LectionsListView, LectionReadView, LectionSearchView, LectionsYearsMetaView
+from library.views import (
+    LectionsListView,
+    LectionReadView,
+    LectionSearchView,
+    LectionsYearsMetaView,
+)
 
 urlpatterns = [
     path("lections/", LectionsListView.as_view(), name="lections-list"),
