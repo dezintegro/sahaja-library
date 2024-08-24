@@ -52,26 +52,26 @@ jobs:
 
           # Build and start the services based on the input
           if [ "${{ github.event.inputs.deploy_frontend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker-compose build frontend
+            docker compose build frontend
           fi
           if [ "${{ github.event.inputs.deploy_backend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker-compose build api-backend
+            docker compose build api-backend
           fi
           if [ "${{ github.event.inputs.deploy_nginx }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker-compose build nginx
+            docker compose build nginx
           fi
           if [ "${{ github.event.inputs.deploy_database }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker-compose build postgres
+            docker compose build postgres
           fi
 
           # Start the services
-          docker-compose up -d
+          docker compose up -d
 
           # Optional: Run database migrations
-          # docker-compose exec -T api-backend python manage.py migrate
+          # docker compose exec -T api-backend python manage.py migrate
 
           # Optional: Load fixtures if needed
-          # docker-compose exec -T api-backend python manage.py loaddata fixtures.json
+          # docker compose exec -T api-backend python manage.py loaddata fixtures.json
 
           # Clean up old images
           docker image prune -f
