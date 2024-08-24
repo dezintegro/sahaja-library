@@ -5,28 +5,6 @@ on:
     branches: [ main, ci ]
   pull_request:
     branches: [ main, ci ]
-  workflow_dispatch:
-    inputs:
-      deploy_frontend:
-        description: 'Deploy Frontend'
-        required: true
-        type: boolean
-        default: true
-      deploy_backend:
-        description: 'Deploy Backend'
-        required: true
-        type: boolean
-        default: true
-      deploy_nginx:
-        description: 'Deploy Nginx'
-        required: true
-        type: boolean
-        default: true
-      deploy_database:
-        description: 'Deploy Database'
-        required: true
-        type: boolean
-        default: true
 
 jobs:
   deploy:
@@ -49,22 +27,11 @@ jobs:
           # Pull the latest changes from GitHub
           git checkout main
           git pull origin main
+          
+          pwd
 
-          # Build and start the services based on the input
-          if [ "${{ github.event.inputs.deploy_frontend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker compose build frontend
-          fi
-          if [ "${{ github.event.inputs.deploy_backend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker compose build api-backend
-          fi
-          if [ "${{ github.event.inputs.deploy_nginx }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker compose build nginx
-          fi
-          if [ "${{ github.event.inputs.deploy_database }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
-            docker compose build postgres
-          fi
-
-          # Start the services
+          # Build and start the services
+          docker compose build
           docker compose up -d
 
           # Optional: Run database migrations
@@ -74,4 +41,4 @@ jobs:
           # docker compose exec -T api-backend python manage.py loaddata fixtures.json
 
           # Clean up old images
-          docker image prune -f
+          # docker image prune -f
