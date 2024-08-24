@@ -1,0 +1,77 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main, ci ]
+  pull_request:
+    branches: [ main, ci ]
+  workflow_dispatch:
+    inputs:
+      deploy_frontend:
+        description: 'Deploy Frontend'
+        required: true
+        type: boolean
+        default: true
+      deploy_backend:
+        description: 'Deploy Backend'
+        required: true
+        type: boolean
+        default: true
+      deploy_nginx:
+        description: 'Deploy Nginx'
+        required: true
+        type: boolean
+        default: true
+      deploy_database:
+        description: 'Deploy Database'
+        required: true
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          # Navigate to the project directory
+          cd sahaja-library
+
+          # Pull the latest changes from GitHub
+          git checkout main
+          git pull origin main
+
+          # Build and start the services based on the input
+          if [ "${{ github.event.inputs.deploy_frontend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            docker-compose build frontend
+          fi
+          if [ "${{ github.event.inputs.deploy_backend }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            docker-compose build api-backend
+          fi
+          if [ "${{ github.event.inputs.deploy_nginx }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            docker-compose build nginx
+          fi
+          if [ "${{ github.event.inputs.deploy_database }}" == "true" ] || [ "${{ github.event_name }}" != "workflow_dispatch" ]; then
+            docker-compose build postgres
+          fi
+
+          # Start the services
+          docker-compose up -d
+
+          # Optional: Run database migrations
+          # docker-compose exec -T api-backend python manage.py migrate
+
+          # Optional: Load fixtures if needed
+          # docker-compose exec -T api-backend python manage.py loaddata fixtures.json
+
+          # Clean up old images
+          docker image prune -f
