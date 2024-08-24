@@ -1,0 +1,44 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main, ci ]
+  pull_request:
+    branches: [ main, ci ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Deploy to server
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        script: |
+          # Navigate to the project directory
+          cd sahaja-library
+
+          # Pull the latest changes from GitHub
+          git checkout main
+          git pull origin main
+          
+          pwd
+
+          # Build and start the services
+          docker compose build
+          docker compose up -d
+
+          # Optional: Run database migrations
+          # docker compose exec -T api-backend python manage.py migrate
+
+          # Optional: Load fixtures if needed
+          # docker compose exec -T api-backend python manage.py loaddata fixtures.json
+
+          # Clean up old images
+          # docker image prune -f
