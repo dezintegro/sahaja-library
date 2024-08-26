@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { SearchInput } from '../ui/SearchInput'
+import { SearchInput } from '../../ui/SearchInput'
 import { useRouter } from 'next/router'
 
 export const SearchForm: FC = () => {

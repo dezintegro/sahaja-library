@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import mainPageStyles from './MainPage.module.css'
-import { SearchForm } from '../../components/Search/SearchForm'
+import { SearchForm } from '../../components/features/Search/SearchForm'
 import Link from 'next/link'
 
 export default function MainPage() {

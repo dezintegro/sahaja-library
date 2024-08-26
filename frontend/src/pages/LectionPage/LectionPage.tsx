@@ -1,5 +1,5 @@
 import lectionPageStyles from './LectionPage.module.css'
-import { Lection } from '../../components/Lection/Lection'
+import { Lection } from '../../components/features/Lection/Lection'
 
 export default function LectionPage() {
   return (

@@ -1,4 +1,4 @@
-import YearsList from '../../components/Catalog/YearsList'
+import YearsList from '../../components/features/YearsList/YearsList'
 import searchResultPageStyles from '../SearchResultPage/SearchResultPage.module.css'
 
 export default function CatalogByYearsPage() {

@@ -1,5 +1,5 @@
-import SearchResult from '../../components/Search/SearchResult'
-import { SearchForm } from '../../components/Search/SearchForm'
+import SearchResult from '../../components/features/Search/SearchResult'
+import { SearchForm } from '../../components/features/Search/SearchForm'
 import searchResultPageStyles from './SearchResultPage.module.css'
 
 export default function SearchResultPage() {
