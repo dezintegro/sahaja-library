@@ -58,8 +58,10 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework",
     "corsheaders",
-    "library",
-    "core",
+    # First party apps
+    "modules.core",
+    "modules.catalog",
+    "modules.search",
 ]
 
 MIDDLEWARE = [
@@ -145,7 +147,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "DEFAULT_PAGINATION_CLASS": "modules.core.pagination.PageNumberWithSizePagination",
     "PAGE_SIZE": 10,
     # "PAGE_SIZE": None,
 }

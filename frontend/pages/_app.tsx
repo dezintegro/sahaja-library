@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Suspense } from 'react'
-import { Metrika } from '../src/components/Metrika'
+import { Metrika } from '../src/components/common/Metrika'
 import Head from 'next/head'
 
 export default function App({ Component, pageProps }: AppProps) {
