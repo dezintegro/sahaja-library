@@ -42,12 +42,19 @@ class DatesExtractor(Extractor):
         Extractor.__init__(self, DATE, morph)
 
 
-def extract_date(query: str) -> Optional[Date]:
+def _parse_date(query: str) -> Optional[Date]:
     morph_vocab = MorphVocab()
     dates_extractor = DatesExtractor(morph_vocab)
     result = list(dates_extractor(query))
     return result[0] if result else None
 
 
-def remove_date(query: str, date: Date) -> str:
+def _remove_date(query: str, date: Date) -> str:
     return f"{query[:date.start]}{query[date.stop:]}"
+
+
+def extract_date(query_str):
+    date_entity = _parse_date(query_str)
+    if date_entity:
+        query_str = _remove_date(query_str, date_entity)
+    return query_str, date_entity

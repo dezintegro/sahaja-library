@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from library.models import Lection
+from modules.core.models import Lection
 
 LINE_SEPARATOR = "<br/>"
 INDENT_SYMBOL = "&nbsp" * 8
@@ -39,8 +39,3 @@ class LectionReadSerializer(LectionSerializer):
         # Get content from qs annotation and prettify indents
         content = getattr(obj, "content", obj.content_ru)
         return format_content(content)
-
-
-class LectionsByYearSerializer(serializers.Serializer):
-    year = serializers.CharField(read_only=True, source="date__year")
-    count = serializers.IntegerField(read_only=True)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from library import models
+from modules.core import models
 
 
 @admin.register(models.Lection)
