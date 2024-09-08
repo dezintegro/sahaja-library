@@ -11,10 +11,12 @@ export default function App({ Component, pageProps }: AppProps) {
         <Metrika />
       </Suspense>
       <Head>
-        <title>Сахаджа Йога - Библиотека лекций Шри Матаджи Нирмала Деви</title>
+        <title>Лекции Шри Матаджи Нирмала Деви | Сахаджа Йога</title>
         <meta
           name="description"
-          content="Сахаджа Библиотека - поиск по лекциям Шри Матаджи Нирмала Деви. Введите запрос и найдите лекции по интересующей теме."
+          content="Познавайте Сахаджа Йгоу через лекции Шри Матаджи.
+          Библиотека лекций от основательницы Сахаджа Йоги.
+          Поиск по тексатм и датам лекций."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:image" content="/og-image.jpg" />

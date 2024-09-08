@@ -1,9 +1,9 @@
 import YearsList from '../../components/features/YearsList/YearsList'
-import searchResultPageStyles from '../SearchResultPage/SearchResultPage.module.css'
 
 export default function CatalogByYearsPage() {
   return (
-    <div className={searchResultPageStyles.container}>
+    <div className="container">
+      <h1 className="text-4xl">Лекции Шри Матаджи по годам</h1>
       <YearsList />
     </div>
   )

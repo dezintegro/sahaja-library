@@ -9,8 +9,7 @@ html {
 }
 
 h1 {
-    font-size: 150%; /* Here */
-    font-weight: bold;
+    font-size: 150%;
     text-align: center;
 }
 
@@ -22,4 +21,14 @@ h1 {
 
 .secondaryFont {
     color: #6E7173;
+}
+
+.container {
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }

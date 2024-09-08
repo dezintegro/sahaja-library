@@ -24,7 +24,7 @@ export const SearchInput: FC<ISearchInputProps> = ({ value, onChange, onSearch }
         autoFocus
         autoComplete="off"
         type="text"
-        placeholder="Введите запрос"
+        placeholder="Введите тему, дату или слова из лекции"
         value={value}
         onChange={(event) => handleChange(event)}
         onKeyDown={handleKeyDown}
@@ -32,9 +32,6 @@ export const SearchInput: FC<ISearchInputProps> = ({ value, onChange, onSearch }
       <button className={searchStyles.btnGrad} onClick={onSearch}>
         Найти
       </button>
-      {/*<Button outline={false} gradientDuoTone="cyanToBlue" onClick={onSearch}>*/}
-      {/*  Найти*/}
-      {/*</Button>*/}
     </div>
   )
 }

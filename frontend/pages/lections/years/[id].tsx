@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import LectionPage from '../../../src/pages/LectionPage/LectionPage'
+import LectionsByYearPage from '../../../src/pages/LectionsByYearPage/LectionsByYearPage'
 
-export const LectionsByYear: FC = () => {
-  return <LectionPage />
+export const LectionsByYear: FC = (id) => {
+  return <LectionsByYearPage/>
 }
 
 export default LectionsByYear
