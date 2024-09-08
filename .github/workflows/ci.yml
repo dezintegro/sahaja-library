@@ -21,11 +21,11 @@ jobs:
         script: |
           # Navigate to the project directory
           cd sahaja-library
-
-          # Pull the latest changes from GitHub
-          git checkout main
-          git pull origin main
           
+          # Reset to the commit that triggered the workflow
+          git fetch origin
+          git reset --hard $GITHUB_SHA
+
           pwd
 
           # Build and start the services
