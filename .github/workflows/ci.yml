@@ -22,9 +22,12 @@ jobs:
           # Navigate to the project directory
           cd sahaja-library
           
+          echo ${GITHUB_SHA}
+          echo ${{github.sha}}
+          
           # Reset to the commit that triggered the workflow
           git fetch origin
-          git reset --hard ${GITHUB_SHA}
+          git reset --hard ${{github.sha}}
 
           pwd
 
