@@ -18,7 +18,11 @@ class LectionManager(models.Manager):
         return (
             super()
             .get_queryset()
-            .filter(content_ru__isnull=False, date__isnull=False, country__isnull=False)
+            .filter(content_ru__isnull=False,
+                    country__isnull=False,
+                    date__isnull=False,
+                    is_lection=True,
+                    )
         )
 
 
@@ -44,6 +48,7 @@ class Lection(models.Model):
     # Migration fields
     is_lection = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
+    is_meta = models.BooleanField(default=False)
 
     objects = LectionManager()
 
