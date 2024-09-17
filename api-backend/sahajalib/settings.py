@@ -37,17 +37,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+DOMAIN = os.environ.get("DOMAIN")
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-ef%p12@x$0cbm4vr(i0*h7dh#7)()tlq#51^q(m=2c7xo+qzx#"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = strtobool(os.environ.get("IS_DEBUG", "0"))
 
-ALLOWED_HOSTS = ["*"]
-
+ALLOWED_HOSTS = [DOMAIN]
+if DEBUG:
+    ALLOWED_HOSTS.append("localhost")
+    ALLOWED_HOSTS.append("127.0.0.1")
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -55,6 +57,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sitemaps",
     "django_filters",
     "rest_framework",
     "corsheaders",
@@ -149,33 +152,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "modules.core.pagination.PageNumberWithSizePagination",
     "PAGE_SIZE": 10,
-    # "PAGE_SIZE": None,
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://localhost:3000",
+    f"https://{DOMAIN}",
 ]
-
-# LOGGING = {
-#     "version": 1,
-#     "filters": {
-#         "require_debug_true": {
-#             "()": "django.utils.log.RequireDebugTrue",
-#         }
-#     },
-#     "handlers": {
-#         "console": {
-#             "level": "DEBUG",
-#             # "filters": ["require_debug_true"],
-#             "class": "logging.StreamHandler",
-#         }
-#     },
-#     "loggers": {
-#         "django.db.backends": {
-#             "level": "DEBUG",
-#             "handlers": ["console"],
-#         }
-#     },
-# }
+if DEBUG:
+    CORS_ALLOWED_ORIGINS.append("http://localhost:8000")
+    CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
