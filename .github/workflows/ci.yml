@@ -2,7 +2,7 @@ name: CI/CD
 
 on:
   push:
-    branches: [ main, ci ]
+    branches: [ main, ci, feature/nginx-ssl ]
 
 jobs:
   deploy:
