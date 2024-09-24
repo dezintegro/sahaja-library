@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <meta property="og:image" content="/og-image.jpg"/>
-        <link rel="icon" href="/favicon.ico"/>
+        <link rel="icon" href="/favicon96x96.ico"/>
         <link rel="canonical" href="https://sahajalib.com/"/>
       </Head>
       <Component {...pageProps} />
