@@ -21,4 +21,4 @@ api-backend/.env*
 .helm/charts
 
 /frontend_vue/
-
+certbot/
