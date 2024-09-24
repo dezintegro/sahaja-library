@@ -11,16 +11,17 @@ export default function App({ Component, pageProps }: AppProps) {
         <Metrika />
       </Suspense>
       <Head>
-        <title>Лекции Шри Матаджи Нирмала Деви | Сахаджа Йога</title>
+        <title>Лекции Шри Матаджи Нирмала Деви | Библиотека Сахаджа Йоги</title>
         <meta
           name="description"
           content="Познавайте Сахаджа Йгоу через лекции Шри Матаджи.
           Библиотека лекций от основательницы Сахаджа Йоги.
           Поиск по тексатм и датам лекций."
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:image" content="/og-image.jpg" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta property="og:image" content="/og-image.jpg"/>
+        <link rel="icon" href="/favicon.ico"/>
+        <link rel="canonical" href="https://sahajalib.com/"/>
       </Head>
       <Component {...pageProps} />
     </>
