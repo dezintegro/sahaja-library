@@ -168,3 +168,11 @@ CORS_ALLOWED_ORIGINS = [
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append("http://localhost:8000")
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
+
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{DOMAIN}",
+    f"http://{DOMAIN}",
+]
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS.append("http://localhost:8000")
+    CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
