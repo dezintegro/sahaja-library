@@ -1,5 +1,6 @@
 from django.contrib.postgres.search import SearchVectorField
 from django.db import models
+from pgvector.django import VectorField
 
 
 class Country(models.Model):
@@ -44,6 +45,9 @@ class Lection(models.Model):
     tsvector_ru = SearchVectorField(
         blank=True, null=True
     )  # This field type is a guess.
+    embedding = VectorField(
+        dimensions=384, blank=True, null=True
+    )  # Semantic search embeddings
 
     # Migration fields
     is_lection = models.BooleanField(default=True)
