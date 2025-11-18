@@ -24,6 +24,7 @@ from .sitemaps import sitemaps
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/auth/", include("modules.authentication.urls")),
     path("api/", include("modules.search.urls")),
     path("api/", include("modules.catalog.urls")),
     path('sitemap.xml', cache_page(86400)(sitemap), {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),

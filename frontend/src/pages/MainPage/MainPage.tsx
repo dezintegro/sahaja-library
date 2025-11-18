@@ -1,12 +1,16 @@
 import Head from 'next/head'
 import mainPageStyles from './MainPage.module.css'
 import { SearchForm } from '../../components/features/Search/SearchForm'
+import { AuthButtons } from '../../components/common/AuthButtons'
 import Link from 'next/link'
 import { Button } from 'flowbite-react'
 
 export default function MainPage() {
   return (
     <>
+      <div className="absolute top-4 right-4 z-10">
+        <AuthButtons />
+      </div>
       <div className={mainPageStyles.container}>
         <h1 className="text-slate-700 text-xl sm:text-4xl md:text-4xl text-center mb-8">
           Сахаджа Йога <br/>

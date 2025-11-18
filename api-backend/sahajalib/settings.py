@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "modules.core",
     "modules.catalog",
     "modules.search",
+    "modules.authentication",
 ]
 
 MIDDLEWARE = [
@@ -159,6 +160,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "modules.core.pagination.PageNumberWithSizePagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
 }
 
 CORS_ALLOWED_ORIGINS = [
@@ -169,6 +176,22 @@ if DEBUG:
     CORS_ALLOWED_ORIGINS.append("http://localhost:8000")
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
 
+# Allow credentials (cookies) in CORS requests
+CORS_ALLOW_CREDENTIALS = True
+
+# Allow specific headers for authentication
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
 CSRF_TRUSTED_ORIGINS = [
     f"https://{DOMAIN}",
     f"http://{DOMAIN}",
@@ -176,3 +199,30 @@ CSRF_TRUSTED_ORIGINS = [
 if DEBUG:
     CSRF_TRUSTED_ORIGINS.append("http://localhost:8000")
     CSRF_TRUSTED_ORIGINS.append("http://localhost:3000")
+
+# Cookie settings for session and CSRF
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_HTTPONLY = False  # JavaScript needs to read CSRF token
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# In production, set secure cookies
+if not DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+
+# Frontend URL for password reset emails
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", "noreply@sahaja-library.org")
+
+# In production, use SMTP
+if not DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = os.environ.get("EMAIL_HOST", "smtp.gmail.com")
+    EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")

@@ -2,11 +2,12 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Suspense } from 'react'
 import { Metrika } from '../src/components/common/Metrika'
+import { AuthProvider } from '../src/shared/contexts/AuthContext'
 import Head from 'next/head'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <AuthProvider>
       <Suspense>
         <Metrika />
       </Suspense>
@@ -24,6 +25,6 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="canonical" href="https://sahajalib.com/"/>
       </Head>
       <Component {...pageProps} />
-    </>
+    </AuthProvider>
   )
 }
